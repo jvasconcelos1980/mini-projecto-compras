@@ -1,9 +1,12 @@
 package com.example.compras
 
 import NavigationManager
+import android.nfc.Tag
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -16,6 +19,7 @@ import kotlinx.android.synthetic.main.drawer_header.view.*
 class compras () : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private var listaCompras = ArrayList<lista_compras>()
+    private val TAG = compras::class.java.simpleName
 
     var produto1 = lista_compras("Bananas",3, 5.0)
     var produto2 = lista_compras("Cebolas",3, 4.0)
@@ -114,6 +118,8 @@ class compras () : AppCompatActivity(), NavigationView.OnNavigationItemSelectedL
 
         // Código para fazer Lista
 
+        lista_artigos.adapter = ArrayAdapter(this,android.R.layout.simple_expandable_list_item_1,
+            arrayListOf("teste","teste 2"))
 
         // End
 
@@ -121,13 +127,14 @@ class compras () : AppCompatActivity(), NavigationView.OnNavigationItemSelectedL
 
         calcularQuantidades().let { nav_drawer.getHeaderView(0).quantidadeArtigos.text = it }
         calcularTotal().let { nav_drawer.getHeaderView(0).valorTotalPagar.text = it }
-
     }
+
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
             R.id.criarArtigo -> NavigationManager.goToNovoArtigoFragment(supportFragmentManager)
         }
         menu_drawer.closeDrawer(GravityCompat.START)
+        Log.i(TAG,"menu fechado...")
         return true
     }
 }

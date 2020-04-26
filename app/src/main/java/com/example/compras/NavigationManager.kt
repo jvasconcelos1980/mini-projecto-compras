@@ -28,7 +28,5 @@ abstract class NavigationManager{
             placeFragment(fm, formulario_compras())
         }
 
-
-
     }
 }

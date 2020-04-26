@@ -41,28 +41,33 @@
                     />
             </LinearLayout>
 
+
+
         </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
 
     <LinearLayout
+        android:id="@+id/zona_listas"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:weightSum="9"
+        android:clickable="true"
+        android:focusable="auto"
+        android:keepScreenOn="true"
+        android:longClickable="true"
+        android:orientation="horizontal"
         android:textColor="#000000"
-        android:id="@+id/zona_listas"
-        >
+        android:visibility="visible"
+        tools:visibility="visible">
 
         <ListView
             android:id="@+id/lista_artigos"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="6"
-            />
-
+            android:layout_height="match_parent" />
 
     </LinearLayout>
+
+
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_drawer"
         android:layout_width="match_parent"
@@ -71,5 +76,7 @@
         app:headerLayout="@layout/drawer_header"
         app:menu="@menu/drawer_menu"
         >
+
+
     </com.google.android.material.navigation.NavigationView>
 </androidx.drawerlayout.widget.DrawerLayout>
