@@ -112,16 +112,17 @@ class compras () : AppCompatActivity(), NavigationView.OnNavigationItemSelectedL
             NavigationManager.goToComprasFragment(supportFragmentManager)
         }
 
-        // CODIGO PARA CARREGAR LISTA
+        // Código para fazer Lista
 
 
-        // FIM DE CODIGO DE LISTA
+        // End
 
-        //update totais
+        //update totais & quantidades no menu drawer
+
         calcularQuantidades().let { nav_drawer.getHeaderView(0).quantidadeArtigos.text = it }
         calcularTotal().let { nav_drawer.getHeaderView(0).valorTotalPagar.text = it }
-    }
 
+    }
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
             R.id.criarArtigo -> NavigationManager.goToNovoArtigoFragment(supportFragmentManager)
@@ -129,9 +130,5 @@ class compras () : AppCompatActivity(), NavigationView.OnNavigationItemSelectedL
         menu_drawer.closeDrawer(GravityCompat.START)
         return true
     }
-
-
-
-
 }
 
