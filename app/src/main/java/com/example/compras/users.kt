@@ -1,6 +1,20 @@
 package com.example.compras
 
-class users (val nome: String, val user: String, val password: String){
+class users (var nome: String, var user: String, var password: String){
 
+    fun getUsername() : String {
+        return this.user
+    }
 
+    fun getPwd() : String {
+        return this.password
+    }
+
+    fun getNomeUser() : String {
+        return this.nome
+    }
 }
+
+
+
+

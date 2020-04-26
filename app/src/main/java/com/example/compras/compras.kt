@@ -13,6 +13,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_compras.*
+import kotlinx.android.synthetic.main.activity_formulario_compras.view.*
+import kotlinx.android.synthetic.main.drawer_header.*
+import kotlinx.android.synthetic.main.drawer_header.view.*
 
 class compras () : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -21,10 +24,10 @@ class compras () : AppCompatActivity(), NavigationView.OnNavigationItemSelectedL
     var produto1 = lista_compras("Bananas",3, 5.0)
     var produto2 = lista_compras("Cebolas",3, 4.0)
     var produto3 = lista_compras("Batatas",3, 1.0)
-
+    
     // Calcular # produtos + preços totais
 
-    fun calcularTotal (): Double {
+    fun calcularTotal (): String {
         var totalaPagar : Double = 0.0
         var i : Int = 0
 
@@ -33,10 +36,14 @@ class compras () : AppCompatActivity(), NavigationView.OnNavigationItemSelectedL
             i += 1
         }
 
-        return totalaPagar
+        val valorString : String
+
+        valorString = "Total a Pagar: " + totalaPagar + "€"
+
+        return valorString
     }
 
-    fun calcularQuantidades () : Int {
+    fun calcularQuantidades () : String {
         var i : Int = 0
         var quantidade : Int = 0
 
@@ -45,7 +52,9 @@ class compras () : AppCompatActivity(), NavigationView.OnNavigationItemSelectedL
             i += 1
         }
 
-        return quantidade
+        val quantidadeString = "# Artigos: " + quantidade
+
+        return quantidadeString
     }
 
     // Adicionar um novo produto
@@ -86,6 +95,7 @@ class compras () : AppCompatActivity(), NavigationView.OnNavigationItemSelectedL
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
 
+
         listaCompras.add(produto1)
         listaCompras.add(produto2)
         listaCompras.add(produto3)
@@ -94,6 +104,11 @@ class compras () : AppCompatActivity(), NavigationView.OnNavigationItemSelectedL
         setContentView(R.layout.activity_compras)
         setSupportActionBar(toolbar)
         setupDrawerMenu()
+        val user_nome = intent.getStringExtra("nome_utilizador")
+        val nome_user = intent.getStringExtra("utilizador")
+        user_nome.let { nav_drawer.getHeaderView(0).nome_utilizador.text = it }
+        nome_user.let { nav_drawer.getHeaderView(0).username.text = it }
+
         if (!screenRotated(savedInstanceState)) {
             NavigationManager.goToCalculatorFragment(supportFragmentManager)
         }
@@ -102,21 +117,10 @@ class compras () : AppCompatActivity(), NavigationView.OnNavigationItemSelectedL
         // CODIGO PARA CARREGAR LISTA
 
 
-
         // FIM DE CODIGO DE LISTA
 
-
-        val t = calcularTotal()
-        val q = calcularQuantidades()
-
-        Toast.makeText(this,"Totais Atualizados...", Toast.LENGTH_SHORT).show()
-        // Incluir IDs dos textos
-
-        // crashing - java.lang.IllegalStateException: quantidadeArtigos must not be null
-        // resolver mais tarde (info encontra-se no menu drawer
-
-        //valorTotalPagar.text = t.toString()
-        //quantidadeArtigos.text = "# Artigos: " + q.toString()
+        calcularQuantidades().let { nav_drawer.getHeaderView(0).quantidadeArtigos.text = it }
+        calcularTotal().let { nav_drawer.getHeaderView(0).valorTotalPagar.text = it }
 
     }
 

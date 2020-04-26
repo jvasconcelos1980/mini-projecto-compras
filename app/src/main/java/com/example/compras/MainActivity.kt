@@ -15,32 +15,43 @@ import android.widget.EditText
 
 class MainActivity : AppCompatActivity() {
 
+    // criação de 2 users
     val user1 = users("John Doe","john@ulusofona.pt","doe")
     val user2 = users("Gary Mitch","gary@ulusofona.pt","mitch")
 
+    private var lista_users = ArrayList<users>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        // adicionar user1 e users 2 na lista de users
+
+        lista_users.add(user1)
+        lista_users.add(user2)
+
         login_id.setOnClickListener (){
 
-            var inputUser = findViewById(R.id.username_id) as EditText // ALTERAR FindbyID
-            var inputPassword = findViewById(R.id.password_id) as EditText // ALTERAR FindbyID
+            //variaveis de inputs no quadro de auth
+            val username = username_id.text.toString()
+            val password = password_id.text.toString()
 
-            val u = inputUser.text.toString()
-            val p = inputPassword.text.toString()
+            // procurar se user é valido dentro da lista de utilizadores
 
-            // incluir FOR para validar user
-
-            if ((user1.user.equals(u) && user1.password.equals(p)) || (user2.user.equals(u) && user2.password.equals(p))) {
-                val i = Intent(applicationContext, com.example.compras.compras::class.java)
-                // intent.apply { i,  }
-                startActivity(i)
-                Toast.makeText(this,"Great job!",Toast.LENGTH_LONG).show()
-            } else {
-                Toast.makeText(this,"User ou password incorrectos.",Toast.LENGTH_LONG).show()
+            for (user in lista_users) {
+                if (user.getUsername() == username && user.getPwd() == password) {
+                //auth valida
+                    val intentLogin = Intent(this,compras::class.java)
+                    intentLogin.apply { putExtra("utilizador", user.getUsername()) }
+                    intentLogin.apply { putExtra("nome_utilizador", user.getNomeUser()) }
+                    startActivity(intentLogin)
+                    Toast.makeText(this,"Great job!",Toast.LENGTH_LONG).show()
+                } else {
+                    // auth não valida
+                    Toast.makeText(this,"User ou Password incorreto. Tente novamente.",Toast.LENGTH_LONG).show()
+                }
             }
+
         }
 
     }

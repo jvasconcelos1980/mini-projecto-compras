@@ -36,7 +36,7 @@ class comprasAdapter (private val context: Context,
         val titleTextView = rowView.findViewById(R.id.lista_artigos) as TextView
         val subtitleTextView = rowView.findViewById(R.id.lista_artigos) as TextView
         val detailTextView = rowView.findViewById(R.id.lista_artigos) as TextView
-        //val thumbnailImageView = rowView.findViewById(R.id.lista_artigos) as ImageView
+        //val thumbnailImageView = rowView.findViewById(R.id.lista_artigos) as ImageView // fazer mais tarde
 
         val artigoLista = getItem(position) as lista_compras
         titleTextView.text = artigoLista.nomeProduto
