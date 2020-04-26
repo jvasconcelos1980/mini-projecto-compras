@@ -33,7 +33,7 @@ class comprasAdapter (private val context: Context,
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         // Get view for row item
         val rowView = inflater.inflate(R.layout.activity_compras, parent, false)
-        val titleTextView = rowView.findViewById(R.id.lista_artigos) as ListView
+        val titleTextView = rowView.findViewById(R.id.lista_artigos) as TextView
         val subtitleTextView = rowView.findViewById(R.id.lista_artigos) as TextView
         val detailTextView = rowView.findViewById(R.id.lista_artigos) as TextView
         //val thumbnailImageView = rowView.findViewById(R.id.lista_artigos) as ImageView
