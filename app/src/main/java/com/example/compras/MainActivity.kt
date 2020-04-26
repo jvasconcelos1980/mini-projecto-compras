@@ -19,6 +19,8 @@ class MainActivity : AppCompatActivity() {
     val user1 = users("John Doe","john@ulusofona.pt","doe")
     val user2 = users("Gary Mitch","gary@ulusofona.pt","mitch")
 
+    var login_ok : Boolean = false
+
     private var lista_users = ArrayList<users>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,19 +43,21 @@ class MainActivity : AppCompatActivity() {
             for (user in lista_users) {
                 if (user.getUsername() == username && user.getPwd() == password) {
                 //auth valida
+                    login_ok = true
                     val intentLogin = Intent(this,compras::class.java)
                     intentLogin.apply { putExtra("utilizador", user.getUsername()) }
                     intentLogin.apply { putExtra("nome_utilizador", user.getNomeUser()) }
                     startActivity(intentLogin)
                     Toast.makeText(this,"Great job!",Toast.LENGTH_LONG).show()
-                } else {
+                }
+                if (!login_ok) {
                     // auth não valida
                     Toast.makeText(this,"User ou Password incorreto. Tente novamente.",Toast.LENGTH_LONG).show()
                 }
+                                    }
             }
 
         }
 
-    }
-
 }
+
