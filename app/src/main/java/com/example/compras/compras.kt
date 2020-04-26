@@ -4,8 +4,6 @@ import NavigationManager
 import android.os.Build
 import android.os.Bundle
 import android.view.MenuItem
-import android.widget.ArrayAdapter
-import android.widget.ListView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -13,8 +11,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_compras.*
-import kotlinx.android.synthetic.main.activity_formulario_compras.view.*
-import kotlinx.android.synthetic.main.drawer_header.*
 import kotlinx.android.synthetic.main.drawer_header.view.*
 
 class compras () : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -24,7 +20,7 @@ class compras () : AppCompatActivity(), NavigationView.OnNavigationItemSelectedL
     var produto1 = lista_compras("Bananas",3, 5.0)
     var produto2 = lista_compras("Cebolas",3, 4.0)
     var produto3 = lista_compras("Batatas",3, 1.0)
-    
+
     // Calcular # produtos + preços totais
 
     fun calcularTotal (): String {
@@ -92,9 +88,9 @@ class compras () : AppCompatActivity(), NavigationView.OnNavigationItemSelectedL
         toggle.syncState()
     }
 
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
-
 
         listaCompras.add(produto1)
         listaCompras.add(produto2)
@@ -110,9 +106,8 @@ class compras () : AppCompatActivity(), NavigationView.OnNavigationItemSelectedL
         nome_user.let { nav_drawer.getHeaderView(0).username.text = it }
 
         if (!screenRotated(savedInstanceState)) {
-            NavigationManager.goToCalculatorFragment(supportFragmentManager)
+            NavigationManager.goToComprasFragment(supportFragmentManager)
         }
-
 
         // CODIGO PARA CARREGAR LISTA
 
@@ -121,12 +116,20 @@ class compras () : AppCompatActivity(), NavigationView.OnNavigationItemSelectedL
 
         calcularQuantidades().let { nav_drawer.getHeaderView(0).quantidadeArtigos.text = it }
         calcularTotal().let { nav_drawer.getHeaderView(0).valorTotalPagar.text = it }
-
     }
 
-    override fun onNavigationItemSelected(p0: MenuItem): Boolean {
-        // TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        when(item.itemId) {
+            R.id.criarArtigo -> NavigationManager.goToNovoArtigoFragment(supportFragmentManager)
+        }
+
+        menu_drawer.closeDrawer(GravityCompat.START)
         return true
     }
+
+
+
+
 }
 
