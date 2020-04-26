@@ -118,12 +118,10 @@ class compras () : AppCompatActivity(), NavigationView.OnNavigationItemSelectedL
         calcularTotal().let { nav_drawer.getHeaderView(0).valorTotalPagar.text = it }
     }
 
-
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
             R.id.criarArtigo -> NavigationManager.goToNovoArtigoFragment(supportFragmentManager)
         }
-
         menu_drawer.closeDrawer(GravityCompat.START)
         return true
     }
