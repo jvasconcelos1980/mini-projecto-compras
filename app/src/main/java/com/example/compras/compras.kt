@@ -96,10 +96,13 @@ class compras () : AppCompatActivity(), NavigationView.OnNavigationItemSelectedL
         listaCompras.add(produto2)
         listaCompras.add(produto3)
 
+        // menu & Toolbar
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_compras)
         setSupportActionBar(toolbar)
         setupDrawerMenu()
+
+        // update dados de utilizador drawer menu
         val user_nome = intent.getStringExtra("nome_utilizador")
         val nome_user = intent.getStringExtra("utilizador")
         user_nome.let { nav_drawer.getHeaderView(0).nome_utilizador.text = it }
@@ -114,6 +117,7 @@ class compras () : AppCompatActivity(), NavigationView.OnNavigationItemSelectedL
 
         // FIM DE CODIGO DE LISTA
 
+        //update totais
         calcularQuantidades().let { nav_drawer.getHeaderView(0).quantidadeArtigos.text = it }
         calcularTotal().let { nav_drawer.getHeaderView(0).valorTotalPagar.text = it }
     }
