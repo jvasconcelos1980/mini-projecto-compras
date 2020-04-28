@@ -118,8 +118,9 @@ class compras () : AppCompatActivity(), NavigationView.OnNavigationItemSelectedL
 
         // Código para fazer Lista
 
+        // dummy test
         lista_artigos.adapter = ArrayAdapter(this,android.R.layout.simple_expandable_list_item_1,
-            arrayListOf("teste","teste 2"))
+            arrayListOf("item 1", "item 2"))
 
         // End
 
