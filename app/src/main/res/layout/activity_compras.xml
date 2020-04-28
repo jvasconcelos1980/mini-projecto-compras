@@ -50,8 +50,23 @@
             android:id="@+id/lista_artigos"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:clickable="true"
+            >
 
-            />
+            <!--<TextView
+                android:id="@+id/text_produto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="test1" />
+
+            <TextView
+                android:id="@+id/text_quantidade"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="test2" />-->
+        </ListView>
+
+
     </com.google.android.material.appbar.AppBarLayout>
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_drawer"

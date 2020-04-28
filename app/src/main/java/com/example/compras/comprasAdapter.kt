@@ -1,52 +1,31 @@
 package com.example.compras
 
 import android.content.Context
+import android.media.VolumeShaper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
-import android.widget.ImageView
-import android.widget.ListView
 import android.widget.TextView
-import kotlinx.android.synthetic.main.drawer_header.*
+import androidx.recyclerview.widget.RecyclerView
+import kotlinx.android.synthetic.main.activity_compras.view.*
 
-class comprasAdapter (private val context: Context,
-                               private val dataSource: ArrayList<lista_compras>) : BaseAdapter() {
+class ComprasAdapter /*(private val context: Context, private val layout: Int, private val items: List<VolumeShaper.Operation>) : RecyclerView.Adapter<ComprasAdapter.ComprasViewHolder>() */{
 
-    private val inflater: LayoutInflater
-            = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+   /* class ComprasViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-
-    override fun getCount(): Int {
-        return dataSource.size
+        val produto: TextView = view.text_produto
+        val quantidade: TextView = view.text_quantidade
     }
 
-    override fun getItem(position: Int): Any {
-        return dataSource[position]
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ComprasViewHolder {
+        return ComprasViewHolder(LayoutInflater.from(context).inflate(layout,parent,false))
     }
 
-    override fun getItemId(position: Int): Long {
-        return position.toLong()
+    override fun onBindViewHolder(holder: ComprasViewHolder, position: Int) {
+        holder.produto.text = items[position].toString()
+        holder.quantidade.text = items[position].toString()
     }
 
-
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-        // Get view for row item
-        val rowView = inflater.inflate(R.layout.activity_compras, parent, false)
-        val titleTextView = rowView.findViewById(R.id.lista_artigos) as TextView
-        val subtitleTextView = rowView.findViewById(R.id.lista_artigos) as TextView
-        val detailTextView = rowView.findViewById(R.id.lista_artigos) as TextView
-        //val thumbnailImageView = rowView.findViewById(R.id.lista_artigos) as ImageView // fazer mais tarde
-
-        val artigoLista = getItem(position) as lista_compras
-        titleTextView.text = artigoLista.nomeProduto
-        subtitleTextView.text = artigoLista.quantidade.toString()
-        detailTextView.text = artigoLista.precoUnitario.toString()
-
-        //Picasso.with(context).load(artigoLista.imageUrl).placeholder(R.mipmap.ic_launcher).into(thumbnailImageView)
-
-        return rowView
-    }
-
-
+    override fun getItemCount() = items.size
+*/
 }

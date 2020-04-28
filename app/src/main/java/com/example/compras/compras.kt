@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
 import android.widget.ArrayAdapter
+import android.widget.ListView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -119,8 +120,29 @@ class compras () : AppCompatActivity(), NavigationView.OnNavigationItemSelectedL
         // Código para fazer Lista
 
         // dummy test
-        lista_artigos.adapter = ArrayAdapter(this,android.R.layout.simple_expandable_list_item_1,
-            arrayListOf("item 1", "item 2"))
+        //lista_artigos.adapter = ArrayAdapter(this,android.R.layout.simple_expandable_list_item_1, arrayListOf("item 1", "item 2"))
+
+        var listView = findViewById<ListView>(R.id.lista_artigos)
+        val lista_produtos = arrayOfNulls<String>(listaCompras.size)
+        val lista_quantidades = arrayOfNulls<String>(listaCompras.size)
+        val lista_precos = arrayOfNulls<String>(listaCompras.size)
+
+
+        for (i in 0 until listaCompras.size) {
+            val item = listaCompras[i]
+            lista_produtos[i] = "\n" +
+                    "\nDescrição: " + item.getProduto().toString() +
+                    "\nQuantidade: " + item.getQuantidades().toString() +
+                    "\nPreço unit: " + item.getPrecos().toString() + "€" +
+                    "\n" +
+                    "\nTotal em " + item.getProduto() + ": " + (item.getQuantidades()*item.getPrecos()).toString() + "€"
+
+
+        }
+
+
+        val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1,lista_produtos)
+        lista_artigos.adapter = adapter
 
         // End
 
