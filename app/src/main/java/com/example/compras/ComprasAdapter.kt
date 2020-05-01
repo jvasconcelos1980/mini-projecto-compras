@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.item_expression.view.*
 
 
 class ComprasAdapter(private val context: Context, private val layout: Int,
-                     private val items: List<Produto>) : RecyclerView.Adapter<ComprasAdapter.ComprasViewHolder>() {
+                     private val items: List<Produto>) : RecyclerView.Adapter<ComprasAdapter.ComprasViewHolder>()  {
     class ComprasViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val produto: TextView = view.text_produto
         val quantidade: TextView = view.text_quantidade
@@ -18,6 +18,7 @@ class ComprasAdapter(private val context: Context, private val layout: Int,
         val total: TextView = view.text_total_pagar
         val adquirido: TextView = view.texto_done_or_not_done
     }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ComprasViewHolder {
         return ComprasViewHolder(LayoutInflater.from(context).inflate(layout,parent,false))
     }
@@ -33,7 +34,19 @@ class ComprasAdapter(private val context: Context, private val layout: Int,
         } else {
             holder.adquirido.text = "ADQUIRIDO"
         }
+    }
 
+
+    fun aumentaQuantidade (position: Int) {
+        items[position].aumentarQt()
+    }
+
+    fun diminiuQuantidade (position: Int) {
+        items[position].diminuirQt()
+    }
+
+    fun alterarEstado (position: Int) {
+        items[position].validarAquisicao()
     }
 
     override fun getItemCount() = items.size

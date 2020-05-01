@@ -11,9 +11,11 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_compras.*
 import kotlinx.android.synthetic.main.drawer_header.view.*
+import kotlinx.android.synthetic.main.item_expression.*
 
 class ListaCompras () : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -124,6 +126,15 @@ class ListaCompras () : AppCompatActivity(), NavigationView.OnNavigationItemSele
         //update totais & quantidades no menu drawer
         calcularQuantidades().let { nav_drawer.getHeaderView(0).quantidadeArtigos.text = it }
         calcularTotal().let { nav_drawer.getHeaderView(0).valorTotalPagar.text = it }
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        // acções de botões (increase, decrease and validate)
+
+
+
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
