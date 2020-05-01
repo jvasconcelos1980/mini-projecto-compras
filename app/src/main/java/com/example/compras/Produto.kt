@@ -2,7 +2,7 @@ package com.example.compras
 
 import android.media.Image
 
-class lista_compras(val nomeProduto: String, val quantidade: Int, val precoUnitario: Double) {
+class Produto(var nomeProduto: String, var quantidade: Int, var precoUnitario: Double, var adquirido : Boolean = false) {
 
     fun mostraNomeProduto() : String {
         return this.nomeProduto
@@ -29,5 +29,14 @@ class lista_compras(val nomeProduto: String, val quantidade: Int, val precoUnita
     fun diminuirQt() {
         this.quantidade.dec()
     }
+
+    fun validarAquisicao(){
+        this.adquirido = true
+    }
+
+    fun obterValidacao() : Boolean {
+     return this.adquirido
+    }
+
 
 }

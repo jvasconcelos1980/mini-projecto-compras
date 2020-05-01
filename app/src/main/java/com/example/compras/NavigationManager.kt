@@ -1,14 +1,8 @@
 
-import android.graphics.Color
-import android.view.MenuItem
-import android.view.View
-import android.widget.Toast
-import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.example.compras.ComprasFragment
 import com.example.compras.R
-import com.example.compras.compras
 import com.example.compras.formulario_compras
 
 

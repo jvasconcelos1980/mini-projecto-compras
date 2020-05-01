@@ -51,16 +51,8 @@
             android:id="@+id/lista_artigos"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".compras"
+            tools:context=".ListaCompras"
             />
-
-    <Button
-        android:layout_width="0dp"
-        android:layout_height="10dp"
-        android:text="+"
-        android:id="@+id/inc_quantidade"
-        >
-    </Button>
 
     </com.google.android.material.appbar.AppBarLayout>
     <com.google.android.material.navigation.NavigationView
@@ -72,6 +64,8 @@
         app:menu="@menu/drawer_menu"
         >
 
+
     </com.google.android.material.navigation.NavigationView>
+
 
 </androidx.drawerlayout.widget.DrawerLayout>

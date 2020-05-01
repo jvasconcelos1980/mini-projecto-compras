@@ -6,6 +6,12 @@
     android:layout_height="wrap_content">
     <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:orientation="horizontal"
+        >
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
         >
@@ -34,7 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Quantidade: "
-            android:textSize="20sp"
+            android:textSize="15sp"
             />
         <TextView
             android:id="@+id/text_quantidade"
@@ -53,7 +59,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Unidades: "
-            android:textSize="20sp"
+            android:textSize="15sp"
             />
         <TextView
             android:id="@+id/text_precoUnit"
@@ -84,6 +90,31 @@
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:orientation="horizontal"
+        >
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Estado: "
+            android:textSize="15sp"
+            />
+        <TextView
+            android:id="@+id/texto_done_or_not_done"
+            android:text="---"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
         >
@@ -100,6 +131,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="-">
+        </Button>
+
+        <Button
+            android:id="@+id/botao_confirmar_done"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="DONE"
+            android:drawableLeft="@drawable/ic_assignment_turned_in_black_24dp"
+            >
         </Button>
     </LinearLayout>
 </LinearLayout>

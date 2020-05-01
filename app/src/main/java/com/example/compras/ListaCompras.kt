@@ -1,35 +1,28 @@
 package com.example.compras
 
 import NavigationManager
-import android.content.Context
-import android.graphics.drawable.ClipDrawable.VERTICAL
-import android.nfc.Tag
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
-import android.widget.ArrayAdapter
-import android.widget.ListView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_compras.*
 import kotlinx.android.synthetic.main.drawer_header.view.*
-import kotlinx.android.synthetic.main.item_expression.*
 
-class compras () : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class ListaCompras () : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
-    private var listaCompras = ArrayList<lista_compras>()
-    private val TAG = compras::class.java.simpleName
+    private var listaCompras = ArrayList<Produto>()
+    private val TAG = ListaCompras::class.java.simpleName
 
-    var produto1 = lista_compras("Bananas",3, 5.0)
-    var produto2 = lista_compras("Cebolas",3, 4.0)
-    var produto3 = lista_compras("Batatas",3, 1.0)
+    var produto1 = Produto("Bananas",3, 5.0)
+    var produto2 = Produto("Cebolas",3, 4.0)
+    var produto3 = Produto("Batatas",3, 1.0)
 
     // Calcular # produtos + preços totais
 
@@ -67,7 +60,7 @@ class compras () : AppCompatActivity(), NavigationView.OnNavigationItemSelectedL
 
     fun adicionarProduto (nome: String, qt: Int, valorUnit: Double) {
 
-        var produtoAdicionar = lista_compras (nome,qt,valorUnit)
+        var produtoAdicionar = Produto (nome,qt,valorUnit)
         listaCompras.add(produtoAdicionar)
         Toast.makeText(this,"Foi adicionado o artigo $nome à lista de compras", Toast.LENGTH_LONG).show()
 
@@ -97,7 +90,6 @@ class compras () : AppCompatActivity(), NavigationView.OnNavigationItemSelectedL
         menu_drawer.addDrawerListener(toggle)
         toggle.syncState()
     }
-
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {

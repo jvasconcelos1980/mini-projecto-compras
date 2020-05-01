@@ -2,15 +2,9 @@ package com.example.compras
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
-import android.widget.Toast.*
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_compras.*
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlin.math.log
-import android.util.*
-import android.widget.EditText
 
 
 class MainActivity : AppCompatActivity() {
@@ -44,7 +38,7 @@ class MainActivity : AppCompatActivity() {
                 if (user.getUsername() == username && user.getPwd() == password) {
                 //auth valida
                     login_ok = true
-                    val intentLogin = Intent(this,compras::class.java)
+                    val intentLogin = Intent(this,ListaCompras::class.java)
                     intentLogin.apply { putExtra("utilizador", user.getUsername()) }
                     intentLogin.apply { putExtra("nome_utilizador", user.getNomeUser()) }
                     startActivity(intentLogin)
