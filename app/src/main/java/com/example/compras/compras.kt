@@ -1,6 +1,8 @@
 package com.example.compras
 
 import NavigationManager
+import android.content.Context
+import android.graphics.drawable.ClipDrawable.VERTICAL
 import android.nfc.Tag
 import android.os.Build
 import android.os.Bundle
@@ -13,9 +15,12 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_compras.*
 import kotlinx.android.synthetic.main.drawer_header.view.*
+import kotlinx.android.synthetic.main.item_expression.*
 
 class compras () : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -119,35 +124,12 @@ class compras () : AppCompatActivity(), NavigationView.OnNavigationItemSelectedL
 
         // Código para fazer Lista
 
-        // dummy test
-        //lista_artigos.adapter = ArrayAdapter(this,android.R.layout.simple_expandable_list_item_1, arrayListOf("item 1", "item 2"))
-
-        var listView = findViewById<ListView>(R.id.lista_artigos)
-        val lista_produtos = arrayOfNulls<String>(listaCompras.size)
-        val lista_quantidades = arrayOfNulls<String>(listaCompras.size)
-        val lista_precos = arrayOfNulls<String>(listaCompras.size)
-
-
-        for (i in 0 until listaCompras.size) {
-            val item = listaCompras[i]
-            lista_produtos[i] = "\n" +
-                    "\nDescrição: " + item.getProduto().toString() +
-                    "\nQuantidade: " + item.getQuantidades().toString() +
-                    "\nPreço unit: " + item.getPrecos().toString() + "€" +
-                    "\n" +
-                    "\nTotal em " + item.getProduto() + ": " + (item.getQuantidades()*item.getPrecos()).toString() + "€"
-
-
-        }
-
-
-        val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1,lista_produtos)
-        lista_artigos.adapter = adapter
+        this.lista_artigos?.layoutManager = LinearLayoutManager(this)
+        lista_artigos?.adapter = ComprasAdapter(this,R.layout.item_expression, listaCompras)
 
         // End
 
         //update totais & quantidades no menu drawer
-
         calcularQuantidades().let { nav_drawer.getHeaderView(0).quantidadeArtigos.text = it }
         calcularTotal().let { nav_drawer.getHeaderView(0).valorTotalPagar.text = it }
     }
@@ -160,5 +142,6 @@ class compras () : AppCompatActivity(), NavigationView.OnNavigationItemSelectedL
         Log.i(TAG,"menu fechado...")
         return true
     }
+
 }
 
