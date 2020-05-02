@@ -1,10 +1,12 @@
 package com.example.compras
 
 import NavigationManager
+import android.content.ContentValues.TAG
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
+import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -14,8 +16,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_compras.*
+import kotlinx.android.synthetic.main.activity_formulario_compras.*
 import kotlinx.android.synthetic.main.drawer_header.view.*
 import kotlinx.android.synthetic.main.item_expression.*
+import java.text.FieldPosition
 
 class ListaCompras () : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -120,21 +124,21 @@ class ListaCompras () : AppCompatActivity(), NavigationView.OnNavigationItemSele
 
         this.lista_artigos?.layoutManager = LinearLayoutManager(this)
         lista_artigos?.adapter = ComprasAdapter(this,R.layout.item_expression, listaCompras)
+        calculateTotals()
 
-        // End
-
-        //update totais & quantidades no menu drawer
-        calcularQuantidades().let { nav_drawer.getHeaderView(0).quantidadeArtigos.text = it }
-        calcularTotal().let { nav_drawer.getHeaderView(0).valorTotalPagar.text = it }
+        let {
+            (lista_artigos?.adapter as ComprasAdapter).registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
+                override fun onChanged() {
+                    Toast.makeText(it,"A recalcular totais...",Toast.LENGTH_LONG).show()
+                    calculateTotals()
+                }
+            })
+        }
     }
 
-    override fun onStart() {
-        super.onStart()
-
-        // acções de botões (increase, decrease and validate)
-
-
-
+    private fun calculateTotals(){
+        calcularQuantidades().let { nav_drawer.getHeaderView(0).quantidadeArtigos.text = it }
+        calcularTotal().let { nav_drawer.getHeaderView(0).valorTotalPagar.text = it }
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
