@@ -20,16 +20,6 @@ class Produto(var nomeProduto: String, var quantidade: Int, var precoUnitario: D
         return this.precoUnitario * this.quantidade
     }
 
-    // para implementar onclick no item selecionado
-    fun aumentarQt() {
-        this.quantidade.inc()
-    }
-
-    // para implementar onclick no item selecionado
-    fun diminuirQt() {
-        this.quantidade.dec()
-    }
-
     fun validarAquisicao(){
         this.adquirido = true
     }
@@ -37,6 +27,5 @@ class Produto(var nomeProduto: String, var quantidade: Int, var precoUnitario: D
     fun obterValidacao() : Boolean {
      return this.adquirido
     }
-
 
 }

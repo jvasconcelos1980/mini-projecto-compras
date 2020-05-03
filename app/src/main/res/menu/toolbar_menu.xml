@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/id_apagar_tudo_lista"
+        android:title="Apagar Todos os Artigos"
+        android:icon="@drawable/toolbar_delete_all"
+        app:showAsAction="always"
+        />
+    <item
+        android:id="@+id/id_produtos_adquiridos"
+        android:title="Mostrar Produtos Adquiridos"
+        android:icon="@drawable/toolbar_done"
+        app:showAsAction="always"
+        />
+    <item
+        android:id="@+id/id_to_do_list"
+        android:title="Mostrar Lista"
+        android:icon="@drawable/to_do_list"
+        app:showAsAction="always"
+        />
+    <item
+        android:id="@+id/adicionar_artigo"
+        android:title="Adicionar Artigo para Lista"
+        android:icon="@drawable/add_artigos"
+        app:showAsAction="always"
+        />
+</menu>

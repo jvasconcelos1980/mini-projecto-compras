@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".formulario_compras">
-
+    android:id="@+id/frame"
+    class="FormularioFragment"
+    tools:context=".FormularioFragment">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -80,6 +81,7 @@
             android:textColor="@color/white" />
 
         <Button
+            android:id="@+id/cancelar_button"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginHorizontal="80dp"
@@ -87,6 +89,5 @@
             android:background="@color/colorPrimaryDark"
             android:text="Cancelar"
             android:textColor="@color/white" />
-
     </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

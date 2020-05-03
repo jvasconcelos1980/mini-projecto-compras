@@ -10,12 +10,12 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
 
     // criação de 2 users
-    val user1 = users("John Doe","john@ulusofona.pt","doe")
-    val user2 = users("Gary Mitch","gary@ulusofona.pt","mitch")
+    val user1 = Utilizadores("John Doe","john@ulusofona.pt","doe")
+    val user2 = Utilizadores("Gary Mitch","gary@ulusofona.pt","mitch")
 
     var login_ok : Boolean = false
 
-    private var lista_users = ArrayList<users>()
+    private var lista_users = ArrayList<Utilizadores>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,12 +35,12 @@ class MainActivity : AppCompatActivity() {
             // procurar se user é valido dentro da lista de utilizadores
 
             for (user in lista_users) {
-                if (user.getUsername() == username && user.getPwd() == password) {
+                if (user.obterUsername() == username && user.obterPassword() == password) {
                 //auth valida
                     login_ok = true
                     val intentLogin = Intent(this,ListaCompras::class.java)
-                    intentLogin.apply { putExtra("utilizador", user.getUsername()) }
-                    intentLogin.apply { putExtra("nome_utilizador", user.getNomeUser()) }
+                    intentLogin.apply { putExtra("utilizador", user.obterUsername()) }
+                    intentLogin.apply { putExtra("nome_utilizador", user.obterNome()) }
                     startActivity(intentLogin)
                     Toast.makeText(this,"Great job!",Toast.LENGTH_LONG).show()
                 }

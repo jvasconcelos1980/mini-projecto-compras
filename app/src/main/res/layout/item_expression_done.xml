@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".ComprasAdapter"
+    tools:context=".ComprasAdapterDone"
     >
     <LinearLayout
         android:layout_width="match_parent"
@@ -12,28 +12,26 @@
         android:orientation="horizontal"
         >
     </LinearLayout>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:clickable="true"
-        android:id="@+id/layout_click_longdelete"
-        android:orientation="horizontal">
-
+        android:orientation="horizontal"
+        >
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Nome de artigo: "
             android:textSize="20sp"
-            android:textStyle="bold" />
-
+            android:textStyle="bold"
+            />
         <TextView
             android:id="@+id/text_produto"
+            android:text="artigo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="artigo"
             android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -121,37 +119,5 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
-        >
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="+"
-            android:id="@+id/botao_add"
-            >
-        </Button>
-        <Button
-            android:id="@+id/botao_remove"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="-">
-        </Button>
-
-
-        <Button
-            android:id="@+id/botao_confirmar_done"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="DONE"
-            android:drawableLeft="@drawable/ic_assignment_turned_in_black_24dp"
-            >
-        </Button>
-
-        <ImageButton
-            android:layout_width="60sp"
-            android:layout_height="match_parent"
-            android:background="#FFFFFF"
-            android:id="@+id/button_delete_artigo"
-            android:src="@android:drawable/ic_menu_delete" />
-    </LinearLayout>
+        />
 </LinearLayout>

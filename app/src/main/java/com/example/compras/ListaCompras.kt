@@ -1,12 +1,13 @@
 package com.example.compras
-
 import NavigationManager
-import android.content.ContentValues.TAG
+import NavigationManager.Companion.goToNovoArtigoFragment
+import android.content.Context
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
 import android.view.MenuItem
-import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -16,21 +17,21 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_compras.*
-import kotlinx.android.synthetic.main.activity_formulario_compras.*
 import kotlinx.android.synthetic.main.drawer_header.view.*
-import kotlinx.android.synthetic.main.item_expression.*
-import java.text.FieldPosition
+import kotlin.math.log
 
 class ListaCompras () : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private var listaCompras = ArrayList<Produto>()
+    private var listaComprasDone = ArrayList<Produto>()
     private val TAG = ListaCompras::class.java.simpleName
 
-    var produto1 = Produto("Bananas",3, 5.0)
-    var produto2 = Produto("Cebolas",3, 4.0)
-    var produto3 = Produto("Batatas",3, 1.0)
+    // produtos standard na lista
+    var produto1 = Produto("Bananas",3, 5.0,adquirido = false)
+    var produto2 = Produto("Cebolas",3, 4.0,adquirido = true)
+    var produto3 = Produto("Batatas",3, 1.0,adquirido = false)
 
-    // Calcular # produtos + preços totais
+    // Calcular # produtos + preços totais, etc
 
     fun calcularTotal (): String {
         var totalaPagar : Double = 0.0
@@ -47,7 +48,6 @@ class ListaCompras () : AppCompatActivity(), NavigationView.OnNavigationItemSele
 
         return valorString
     }
-
     fun calcularQuantidades () : String {
         var i : Int = 0
         var quantidade : Int = 0
@@ -61,9 +61,40 @@ class ListaCompras () : AppCompatActivity(), NavigationView.OnNavigationItemSele
 
         return quantidadeString
     }
+    fun apagarListaProdutos() {
+        listaCompras.clear()
+    }
+    fun atualizaListaDone () {
 
-    // Adicionar um novo produto
+        var listaComprasAux = ArrayList<Produto>()
 
+        for (i in 0 until listaCompras.size) {
+            val item = listaCompras[i]
+            if (item.obterValidacao().equals(true)) {
+                listaComprasAux.add(item)
+                Log.i(TAG,"Artigo na Lista de adquiridos -> " + item.mostraNomeProduto())
+            }
+        }
+        listaComprasDone = listaComprasAux
+    }
+
+    // sem invocação (com erro)
+    fun apagarProdutodaLista(produto: Produto) {
+            listaCompras.remove(produto)
+        }
+
+    // para debug
+    fun tamanhoListas(){
+        Log.i(TAG,"Lista de artigos adquiridos -> " + listaComprasDone.size)
+        Log.i(TAG,"Lista de COMPRAS por adquirir -> " + listaCompras.size)
+    }
+
+    // para debug
+    fun obterProdutoIndex (item: Int) {
+        Log.i(TAG,"Lista de COMPRAS por adquirir -> " + listaCompras[item])
+    }
+
+    // Adicionar um novo produto | método não implementado
     fun adicionarProduto (nome: String, qt: Int, valorUnit: Double) {
 
         var produtoAdicionar = Produto (nome,qt,valorUnit)
@@ -99,12 +130,15 @@ class ListaCompras () : AppCompatActivity(), NavigationView.OnNavigationItemSele
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
+        // menu & Toolbar
+        // adicionar artigos
 
         listaCompras.add(produto1)
         listaCompras.add(produto2)
         listaCompras.add(produto3)
+        tamanhoListas()
+        atualizaListaDone()
 
-        // menu & Toolbar
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_compras)
         setSupportActionBar(toolbar)
@@ -115,6 +149,8 @@ class ListaCompras () : AppCompatActivity(), NavigationView.OnNavigationItemSele
         val nome_user = intent.getStringExtra("utilizador")
         user_nome.let { nav_drawer.getHeaderView(0).nome_utilizador.text = it }
         nome_user.let { nav_drawer.getHeaderView(0).username.text = it }
+        tamanhoListas()
+        atualizaListaDone()
 
         if (!screenRotated(savedInstanceState)) {
             NavigationManager.goToComprasFragment(supportFragmentManager)
@@ -123,17 +159,48 @@ class ListaCompras () : AppCompatActivity(), NavigationView.OnNavigationItemSele
         // Código para fazer Lista
 
         this.lista_artigos?.layoutManager = LinearLayoutManager(this)
-        lista_artigos?.adapter = ComprasAdapter(this,R.layout.item_expression, listaCompras)
+        lista_artigos?.adapter = ComprasAdapter(this,R.layout.item_expression, listaCompras,ListaCompras())
         calculateTotals()
+        tamanhoListas()
+        atualizaListaDone()
 
         let {
             (lista_artigos?.adapter as ComprasAdapter).registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
                 override fun onChanged() {
                     Toast.makeText(it,"A recalcular totais...",Toast.LENGTH_LONG).show()
                     calculateTotals()
+                    tamanhoListas()
                 }
             })
         }
+
+}
+override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.toolbar_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId) {
+            R.id.adicionar_artigo -> {
+                goToNovoArtigoFragment(supportFragmentManager)
+            }
+            R.id.id_apagar_tudo_lista -> {
+                Toast.makeText(this,"clicou em apagar tudo",Toast.LENGTH_LONG).show()
+                apagarListaProdutos()
+                atualizaListaDone()
+                calculateTotals()
+                tamanhoListas()
+                lista_artigos?.adapter = ComprasAdapter(this,R.layout.item_expression, listaCompras, ListaCompras())
+            }
+            R.id.id_produtos_adquiridos -> {
+                atualizaListaDone()
+                tamanhoListas()
+                lista_artigos?.adapter = ComprasAdapterDone(this,R.layout.item_expression_done, listaComprasDone)
+            }
+            R.id.id_to_do_list -> lista_artigos?.adapter = ComprasAdapter(this,R.layout.item_expression, listaCompras, ListaCompras())
+        }
+        return true
     }
 
     private fun calculateTotals(){
@@ -143,7 +210,9 @@ class ListaCompras () : AppCompatActivity(), NavigationView.OnNavigationItemSele
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
-            R.id.criarArtigo -> NavigationManager.goToNovoArtigoFragment(supportFragmentManager)
+            R.id.drawer_logout ->  {
+                setContentView(R.layout.activity_main)
+            }
         }
         menu_drawer.closeDrawer(GravityCompat.START)
         Log.i(TAG,"menu fechado...")

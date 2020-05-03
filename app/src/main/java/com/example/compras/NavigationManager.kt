@@ -3,7 +3,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.example.compras.ComprasFragment
 import com.example.compras.R
-import com.example.compras.formulario_compras
+import com.example.compras.FormularioFragment
 
 
 abstract class NavigationManager{
@@ -13,7 +13,7 @@ abstract class NavigationManager{
         }
 
         fun goToNovoArtigoFragment(fm: FragmentManager){
-            placeFragment(fm, formulario_compras())
+            placeFragment(fm, FormularioFragment())
         }
 
         private fun placeFragment(fm: FragmentManager, fragment: Fragment){
